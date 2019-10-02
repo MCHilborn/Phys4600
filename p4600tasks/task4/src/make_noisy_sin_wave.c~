@@ -1,0 +1,18 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+
+//this function produces a noisy sin wave, for smoothing later
+
+void main(){
+  FILE* sin_output;
+  int sin_wave_size = 1000;
+  float sin_wave[sin_wave_size]; //make an 1000 point sin wave
+  float x[sin_wave_size] //x values for calculating sin wave
+
+  sin_output=fopen("noisy_sin_wave","w");
+  for (int i = 0; i < sin_wave_size; i++){
+    x[i]=M_PI*i/8;
+    sin_wave[i]=sin(x[i])+(float)rand()/(float)RAND_MAX;
+  }
+}
