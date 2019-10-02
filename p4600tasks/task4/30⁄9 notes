@@ -1,0 +1,45 @@
+Don't do this:
+
+mean()
+{
+loop through everything
+printf() //makes it less useful
+}
+
+stdev()
+{
+loop through everything
+call mean function in every iteration of the loop
+}
+
+two ways to get around calculating mean twice:
+1) have stdev require mean as an argument
+2) have a stdev argument that is a pointer to a variable which will hold the mean
+float m;
+s = stdev(data, &m);
+
+
+Errors
+4 levels of errors
+Errors and warnings
+if error occurs, code will not compile.
+warning will still compile. May not link later.
+
+misspelling stuff is most common of first level "compiler error"
+
+syntax error: doing things not allowed in C language
+examples: missed semicolons, assigning things of wrong type (incompatible types)
+
+
+.c --compiles--> .o--link-->executable
+
+Linking errors
+Number one error is when your object file doesn't actually contain the function definition required. (for example forgot to compile another file which has the function definition).
+
+math errors (dividing by zero)
+
+segmentation fault: accessing memory you shouldn't access.
+
+runtime errors: very complicated
+
+logic errors: set up program to do something you don't want to do. Program works but the answers are wrong.
