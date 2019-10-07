@@ -1,0 +1,56 @@
+viwrite: sends a command to the memory on the scope
+viread: reads from the scope
+
+viread: look at scope, load response to buffer, give a size of the buffer, return result count which is length of the response
+
+"CURV?\n" gives you the trace of the oscilliscope. Can be quite big. 2500 bytes. Can read in just a few bytes.
+
+scope functions:
+CH1: VOL 0.1 for millivolts for 100E-3
+
+Read in curve and see if you can find amplitude using amplutude function
+
+a bit of theory:
+how computers hold numbers
+
+the scope's full range of voltage is represented by an 8-bit value (unsigned char, 0-255)
+input is held as a single byte of data
+can change the data width to two bytes
+
+11111100 - FD = -3
+binary hexadecimal decimal
+
+"2s compliment"
+1st bit means sign, "sign bit"
+10000011
+
+gives -0 and +0
+column arithmetic is difficult
+2s compliment fixes this issue
+to make a negative number:
+-17
+000100001 = 17
+take compliment
+111011110
+add 1
+111011111
+
+28 in binary: 0011100
+subtract 17 from 28
+28-17 = 11
+
+28-17 in binary
+
+00011100
+11101111 +
+---------
+00001011
+
+which is 8 + 2 + 1 = 11
+
+the first bit always ends up being 1 if negative and 0 if positive
+
+storing floating point numbers: scientific notation (1.378E36)
+in binary: 1.101011 x 2^3
+shifting the decimal point
+store the mantissa and the exponent
