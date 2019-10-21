@@ -54,3 +54,5 @@ storing floating point numbers: scientific notation (1.378E36)
 in binary: 1.101011 x 2^3
 shifting the decimal point
 store the mantissa and the exponent
+2s compliment doesn't work, must include sign bit
+the first number is implied to be 1.
