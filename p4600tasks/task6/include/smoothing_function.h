@@ -1,0 +1,1 @@
+void smooth_array(float* data, float* output, int length);

@@ -1,0 +1,32 @@
+Interfacing with two devices (how to differentiate)
+
+viFindRsrc(defaultRM, "USB[0-9]::?*INSTR",....); //this finds a list of all resources that are attached to the machine
+which are in the search parameters (second argument)
+All instruments that this can find have that identifier.
+USB0 --> connected via USB port 0
+::[Hex]::[Hex]::[longer hex]::INSTR
+three hex numbers mean something but are unique to each instrument.
+pattern: manufacturer ID :: (supposed to be) type of instrument::product ID
+tektronix: 0x0699
+RIGOL: 0x1AB1 (probably)
+viOpen(default RM, description, ..., &scopeHandle); //open the instrument
+
+we need to give each instrument its own handle
+
+viSession scopeHandle; //nothing special about it being called scope handle
+viSession FGHandle; //function generator's handle
+need to associate FGHandle with the right instrument
+
+do 2 searches
+Search for
+viFindRsrc(defaultRM,"USB[0-9]::0x699?*instr",..) // finds tektronix instrument
+
+viFindRsrc(defaultRM,"USB[0-9]::0x1AB1?*instr",..) //finds rigol instrument
+
+Interact with scope:
+viWrite(scopeHandle,"*IDN?\n",6,...);
+
+interact with FG:
+viWrite(FGHandle,"*IDN?\n",6,...);
+
+all instruments accept the IDN instruction
