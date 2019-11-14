@@ -1,0 +1,41 @@
+Today 4/11/19
+Programming of microcontrollers
+RS232 comm, SPI, I^2C interfaces
+
+Atmel studio: IDE for microcontrollers
+
+What is a microcontroller? It's a computer.
+Main difference: Architecture
+
+PC's are generally Von Neumann architecture.
+Memory is DRAM: A bunch of capacitors
+Volatile memory: requires power to hold data.
+
+Storing data in a less volatile way is required.
+Microcontrollers use a different architecture: harvard or modern harvard architecture.
+
+Program Memory       &        Data Memory
+Flash memory		      SRAM
+Non volatile		      volatile
+Program instructions
+
+We are using ATMEGA328P
+Used in arduino.
+
+GPIO: General purpose input/output pins, Set to high/low.
+In groups called ports.
+
+Also has ADC pins
+(10 bit)
+
+Serial interfaces
+UART Rx & Tx pins
+
+SPI
+MISO MOSI SCK and SS
+
+I^2C
+two-wire interface
+
+RESET pin allows the program to restart
+Usually set to high, resets on low
