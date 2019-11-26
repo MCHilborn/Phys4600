@@ -38,13 +38,13 @@ void main()
 	float capacitance = 200E-9;
 	float inductance = 10E-3;
 	//float bandwidth = find_bandwidth(resistance, capacitance, inductance);
-	float f0 = 10E6; //initial frequency
+	float f0 = 3E2; //initial frequency
 	float frequency;
-	float x_values[10];
-	float y_values[10];
+	float x_values[25];
+	float y_values[25];
 
 	FILE * output_file;
-	output_file = fopen("wave_data.DAT","a");
+	output_file = fopen("wave_data.DAT","w");
 
 	status = viOpenDefaultRM(&defaultRM); //open the resource manager
 	if (status != VI_SUCCESS)
@@ -98,11 +98,11 @@ void main()
 					create a set of data that shows the amplitudes at various frequencies*/
 					//going to take 10 points of data only
 					float conversion_factor = 10*get_scale(1,&scopeHandle)/256; //find the conversion factor to turn the value into voltages
-					for (int i = 0; i < 10; i++)
+					for (int i = 0; i < 15; i++)
 					{	
 						frequency = f0+i*f0; //frequency we will find amplitude at
 						x_values[i] = frequency;
-						setFGFrequency(&FGHandle,1,f0,5); //set the function generator @5V to the frequency;
+						setFGFrequency(&FGHandle,1,frequency,5); //set the function generator @5V to the frequency;
 						get_curve(&scopeHandle,1,2500,dataBuffer); //read the scope connected and put the data into the dataBuffer
 						//TODO: Put curve data into a text file
 
