@@ -1,0 +1,170 @@
+
+Task12.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .data         00000000  00800100  00800100  00000128  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  1 .text         000000d4  00000000  00000000  00000054  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  2 .comment      00000030  00000000  00000000  00000128  2**0
+                  CONTENTS, READONLY
+  3 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  00000158  2**2
+                  CONTENTS, READONLY
+  4 .debug_aranges 00000030  00000000  00000000  00000198  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_info   00000781  00000000  00000000  000001c8  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_abbrev 000006ea  00000000  00000000  00000949  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_line   000002b8  00000000  00000000  00001033  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_frame  00000044  00000000  00000000  000012ec  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_str    000003a9  00000000  00000000  00001330  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_loc    00000086  00000000  00000000  000016d9  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_ranges 00000020  00000000  00000000  0000175f  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 34 00 	jmp	0x68	; 0x68 <__ctors_end>
+   4:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+   8:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+   c:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  10:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  14:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  18:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  1c:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  20:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  24:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  28:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  2c:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  30:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  34:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  38:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  3c:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  40:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  44:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  48:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  4c:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  50:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  54:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  58:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  5c:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  60:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  64:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+
+00000068 <__ctors_end>:
+  68:	11 24       	eor	r1, r1
+  6a:	1f be       	out	0x3f, r1	; 63
+  6c:	cf ef       	ldi	r28, 0xFF	; 255
+  6e:	d8 e0       	ldi	r29, 0x08	; 8
+  70:	de bf       	out	0x3e, r29	; 62
+  72:	cd bf       	out	0x3d, r28	; 61
+  74:	0e 94 55 00 	call	0xaa	; 0xaa <main>
+  78:	0c 94 68 00 	jmp	0xd0	; 0xd0 <_exit>
+
+0000007c <__bad_interrupt>:
+  7c:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+00000080 <setup>:
+#define CS PB6
+#define SS PB2 //keep high
+
+void setup()
+{
+	SPCR |= (1<<SPE); //enable SPI
+  80:	8c b5       	in	r24, 0x2c	; 44
+  82:	80 64       	ori	r24, 0x40	; 64
+  84:	8c bd       	out	0x2c, r24	; 44
+	SPCR |= (1<<MSTR); //master
+  86:	8c b5       	in	r24, 0x2c	; 44
+  88:	80 61       	ori	r24, 0x10	; 16
+  8a:	8c bd       	out	0x2c, r24	; 44
+	SPCR |= (1<<CPOL); //clock polarity
+  8c:	8c b5       	in	r24, 0x2c	; 44
+  8e:	88 60       	ori	r24, 0x08	; 8
+  90:	8c bd       	out	0x2c, r24	; 44
+	DDRB |= (1<<MOSI) | (1<<SCK) | (1<<CS) | (1<<SS);
+  92:	84 b1       	in	r24, 0x04	; 4
+  94:	8c 66       	ori	r24, 0x6C	; 108
+  96:	84 b9       	out	0x04, r24	; 4
+  98:	08 95       	ret
+
+0000009a <function>:
+void function(uint8_t data)
+{
+	
+	uint8_t datarecieved;
+	
+	PORTB &= ~(1<<CS); //pulls CS low
+  9a:	2e 98       	cbi	0x05, 6	; 5
+	SPDR = data; //starts the clock and starts trying to transmit
+  9c:	8e bd       	out	0x2e, r24	; 46
+	
+	while(!(SPSR & (1<<SPIF)));
+  9e:	0d b4       	in	r0, 0x2d	; 45
+  a0:	07 fe       	sbrs	r0, 7
+  a2:	fd cf       	rjmp	.-6      	; 0x9e <function+0x4>
+	
+	datarecieved = SPDR;
+  a4:	8e b5       	in	r24, 0x2e	; 46
+	
+	PORTB |= (1<<CS); //sets CS line high again
+  a6:	2e 9a       	sbi	0x05, 6	; 5
+  a8:	08 95       	ret
+
+000000aa <main>:
+	
+}
+int main(void)
+{
+    /* Replace with your application code */
+	setup();
+  aa:	0e 94 40 00 	call	0x80	; 0x80 <setup>
+    while (1) 
+    {	
+		uint8_t i = 0;
+  ae:	c0 e0       	ldi	r28, 0x00	; 0
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+  b0:	2f e9       	ldi	r18, 0x9F	; 159
+  b2:	86 e8       	ldi	r24, 0x86	; 134
+  b4:	91 e0       	ldi	r25, 0x01	; 1
+  b6:	21 50       	subi	r18, 0x01	; 1
+  b8:	80 40       	sbci	r24, 0x00	; 0
+  ba:	90 40       	sbci	r25, 0x00	; 0
+  bc:	e1 f7       	brne	.-8      	; 0xb6 <main+0xc>
+  be:	00 c0       	rjmp	.+0      	; 0xc0 <main+0x16>
+  c0:	00 00       	nop
+		while(i < 127)
+		{
+			_delay_ms(500);
+			function(i);
+  c2:	8c 2f       	mov	r24, r28
+  c4:	0e 94 4d 00 	call	0x9a	; 0x9a <function>
+			i+=1;
+  c8:	cf 5f       	subi	r28, 0xFF	; 255
+    /* Replace with your application code */
+	setup();
+    while (1) 
+    {	
+		uint8_t i = 0;
+		while(i < 127)
+  ca:	cf 37       	cpi	r28, 0x7F	; 127
+  cc:	89 f7       	brne	.-30     	; 0xb0 <main+0x6>
+  ce:	ef cf       	rjmp	.-34     	; 0xae <main+0x4>
+
+000000d0 <_exit>:
+  d0:	f8 94       	cli
+
+000000d2 <__stop_program>:
+  d2:	ff cf       	rjmp	.-2      	; 0xd2 <__stop_program>
