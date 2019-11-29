@@ -1,0 +1,17 @@
+ADC & DAC
+del T = frequency
+del V = # bits
+# steps = 2^n
+ADC value 0->2^n-1
+ADC value = Vin(2^n)/Vref
+
+ADC done by comparitor
+
+2 ways: Flash ADC (requires lots of components, very fast)
+
+Staircase/Counter ADC
+Uses a DAC & Timer
+Steps up voltage until it is the same as the input voltage
+Slow process
+
+SAR (successive approximation ADC)
