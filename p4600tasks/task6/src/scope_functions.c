@@ -97,7 +97,7 @@ void setFGFrequency(ViSession* handle, int channelNumber, float frequency, float
 	ViStatus status;
 	ViUInt32 resultCount;
 	char request[64];
-	printf("SOUR%d:APPL:SIN %0.2E,%0.2f\n",channelNumber,frequency,amplitude);
+	//printf("SOUR%d:APPL:SIN %0.2E,%0.2f\n",channelNumber,frequency,amplitude);
 	sprintf(request,":SOUR%d:APPL:SIN %0.2E,%0.2f\n",channelNumber,frequency,amplitude);
 	//char requestlength[10];
 	//sprintf(requestlength,strlen(request));

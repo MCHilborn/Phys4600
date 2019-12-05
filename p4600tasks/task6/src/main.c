@@ -98,9 +98,9 @@ void main()
 					create a set of data that shows the amplitudes at various frequencies*/
 					//going to take 10 points of data only
 					float conversion_factor = 10*get_scale(1,&scopeHandle)/256; //find the conversion factor to turn the value into voltages
-					for (int i = 0; i < 15; i++)
+					for (int i = 0; i < 10; i++)
 					{	
-						frequency = f0+i*f0; //frequency we will find amplitude at
+						frequency = f0+3*i*f0; //frequency we will find amplitude at, step is 3*f0. (300->1200->2100)
 						x_values[i] = frequency;
 						setFGFrequency(&FGHandle,1,frequency,5); //set the function generator @5V to the frequency;
 						get_curve(&scopeHandle,1,2500,dataBuffer); //read the scope connected and put the data into the dataBuffer
@@ -114,6 +114,18 @@ void main()
 						y_values[i] = find_amplitude(floatBuffer,2500); //find the amplitude and put it in the corresponding y value
 						fprintf(output_file,"\n %f %f",x_values[i],y_values[i]); //might not work
 					}
+					//find the amplitude of the resonant peak
+					float max_amplitude = 0; //will hold the maximum amplitude
+					float resonant_frequency;
+					for(int k = 0; k < 10; k++)
+					{
+						if (y_values[k] > max_amplitude) 
+						{
+							max_amplitude = y_values[k];
+							resonant_frequency = x_values[k]; //if the element in the amplitudes is the largest, the frequency corresponding to it is the resonant frequency
+						} 
+					}
+					printf("\nResonant Frequency = %f Hz",resonant_frequency);
 					printf("\ndone");
 					fflush(stdout);
 
